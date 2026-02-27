@@ -14,12 +14,22 @@ Predict the likelihood of a loan applicant defaulting based on their financial h
 
 # Load model and preprocessing objects
 def load_resources():
-    # Try both relative and absolute paths for Render stability
     base_dir = os.path.dirname(os.path.abspath(__file__))
     model_path = os.path.join(base_dir, 'models', 'rf_model.pkl')
     encoders_path = os.path.join(base_dir, 'models', 'encoders.pkl')
     features_path = os.path.join(base_dir, 'models', 'features.pkl')
     
+    # SYSTEM DIAGNOSTICS (Visible on Website)
+    with st.expander("🔍 System Diagnostics (Debug)"):
+        st.write(f"**Current Directory:** `{os.getcwd()}`")
+        st.write(f"**App File Path:** `{base_dir}`")
+        if os.path.exists(os.path.join(base_dir, 'models')):
+            st.success("✅ 'models' folder exists.")
+            st.write(f"**Files in 'models/':** `{os.listdir(os.path.join(base_dir, 'models'))}`")
+        else:
+            st.error("❌ 'models' folder NOT found.")
+            st.write(f"**Root directory files:** `{os.listdir(base_dir)}`")
+
     if os.path.exists(model_path) and os.path.exists(encoders_path):
         try:
             with open(model_path, 'rb') as f:
@@ -32,13 +42,7 @@ def load_resources():
         except Exception as e:
             st.error(f"Error loading pickle files: {e}")
             return None, None, None
-    
-    # Debug info for the user if files are missing
-    if not os.path.exists(os.path.join(base_dir, 'models')):
-        st.error(f"Directory 'models' not found in {base_dir}")
-    else:
-        st.write(f"Models directory found, but files might be missing. Files present: {os.listdir(os.path.join(base_dir, 'models'))}")
-        
+            
     return None, None, None
 
 model, encoders, features = load_resources()

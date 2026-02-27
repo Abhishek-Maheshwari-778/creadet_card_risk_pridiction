@@ -56,8 +56,8 @@ def train_model(data_path='loan.csv'):
     # Split Data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    print("Training Random Forest Model...")
-    rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+    print("Training Random Forest Model (Optimized for size)...")
+    rf_model = RandomForestClassifier(n_estimators=50, max_depth=10, random_state=42)
     rf_model.fit(X_train, y_train)
 
     # Evaluation

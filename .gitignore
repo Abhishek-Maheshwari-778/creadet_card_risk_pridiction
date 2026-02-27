@@ -3,4 +3,5 @@ __pycache__/
 *.csv
 *.zip
 *.xlsx
-models/
+/models/*
+!/models/*.pkl

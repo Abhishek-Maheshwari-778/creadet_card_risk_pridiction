@@ -1,0 +1,39 @@
+[12:32 pm, 26/02/2026] Ankit Bca: Mini Project Module-1 all combined model
+[12:32 pm, 26/02/2026] Ankit Bca: 📢 IMPORTANT NOTICE
+
+Each student is mandatory required to deploy an ML model on Render
+
+Step 1: Create GitHub Account & Repository
+
+Create a GitHub account (if not already created)
+
+Create a new repository
+
+Clone the repository to your local system using your GitHub ID
+
+Step 2: Push Project Code to GitHub
+
+Add your ML model project files to the repository
+
+Use Git commands to:
+
+Add files
+
+Commit changes
+
+Push the code to GitHub successfully
+
+Step 3: Create Render Account & Deploy
+
+Create a Render account
+
+Connect your GitHub repository to Render
+
+Configure the deployment settings
+
+Deploy the ML model and generate a live deployment URL
+
+
+For example:https://house-price-prediction-1-9ndf.onrender.com/
+[12:32 pm, 26/02/2026] Ankit Bca: https://www.kaggle.com/datasets/ranadeep/credit-risk-dataset
+[12:32 pm, 26/02/2026] Ankit Bca: Do follow the link and download the dataset

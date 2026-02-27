@@ -1,92 +1,63 @@
 # 💳 Credit Card Risk Prediction
 
-[![Python Version](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/)
+[![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://creadet-card-risk-pridiction.onrender.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A machine learning-powered web application that predicts the credit risk of loan applications. It classifies applicants into **Safe** or **Risky** categories using advanced classification algorithms.
-
-## 🚀 Live Demo
-You can access the live application here: [Credit Risk Predictor on Render](https://creadet-card-risk-pridiction.onrender.com) (Update this link after deployment)
+A high-performance machine learning application that predicts loan default risk. This tool helps financial institutions analyze applicant data and determine creditworthiness using an optimized Random Forest model.
 
 ---
 
-## 📌 Project Overview
-The goal of this project is to provide a tool for financial institutions to assess the creditworthiness of applicants. By analyzing historical loan data, the model identifies patterns associated with defaults and successful repayments.
-
-### Key Features
-- **Interactive Web UI:** Built with Streamlit for a seamless user experience.
-- **Robust ML Pipeline:** Includes data cleaning, feature engineering, and model evaluation.
-- **Multiple Models:** Explores Random Forest, SVM, and XGBoost to ensure the best performance.
-- **Real-time Prediction:** Get instant results by entering applicant details.
+## 📺 Demo Snapshot
+The application features a sidebar for user inputs and a real-time prediction engine:
+*   **Safe**: ✅ Applicant is likely to repay the loan.
+*   **Risky**: 🚨 High probability of default.
 
 ---
 
-## 📊 Dataset
-The project uses the **Lending Club Loan Data**, a comprehensive dataset containing thousands of loan records.
-- **Source:** [Kaggle Credit Risk Dataset](https://www.kaggle.com/datasets/ranadeep/credit-risk-dataset)
-- **Primary file:** `loan.csv`
+## 🚀 Deployment on Render (Step-by-Step)
 
-> [!IMPORTANT]
-> Due to GitHub file size limits (100MB), the raw dataset (`loan.csv`) is ignored via `.gitignore`. Please download it manually from Kaggle if you wish to retrain the model.
+To get this running on Render without the "Not Found" error, follow these exact settings:
 
----
-
-## 🛠️ Installation & Setup
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/Abhishek-Maheshwari-778/creadet_card_risk_pridiction.git
-cd creadet_card_risk_pridiction
-```
-
-### 2. Set Up Environment
-Create a virtual environment and install the required packages:
-```bash
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-### 3. Run the Application Locally
-```bash
-streamlit run app.py
-```
+1.  **Create New Web Service**: Connect your GitHub repo.
+2.  **Runtime**: `Python`
+3.  **Build Command**: `pip install -r requirements.txt`
+4.  **Start Command**: `streamlit run app.py --server.port $PORT --server.address 0.0.0.0`
+5.  **Environment Variables**:
+    *   Add Key: `PYTHON_VERSION`, Value: `3.10.12`
 
 ---
 
-## 🌐 Deployment
-
-### Deploying to Render
-1. Create a free account on [Render](https://render.com/).
-2. Create a new **Web Service**.
-3. Connect your GitHub repository: `Abhishek-Maheshwari-778/creadet_card_risk_pridiction`.
-4. Configure the settings:
-   - **Environment:** `Python`
-   - **Build Command:** `pip install -r requirements.txt`
-   - **Start Command:** `streamlit run app.py`
-
-### Deploying to Streamlit Cloud
-1. Go to [Streamlit Community Cloud](https://share.streamlit.io/).
-2. Click **New app**.
-3. Select your repository, branch (`main`), and main file path (`app.py`).
-4. Click **Deploy!**
+## 📊 Project Workflow
+1.  **Data Cleaning**: Handled missing values and preprocessed Lending Club data.
+2.  **Feature Engineering**: Selected the 18 most impactful features (DTI, Income, Loan Amount, etc.).
+3.  **Model Optimization**: Trained a size-optimized Random Forest model to fit under the 100MB GitHub limit.
+4.  **Deployment**: Integrated with Streamlit for a responsive web interface.
 
 ---
 
 ## 📂 Project Structure
 ```text
-├── models/               # Saved trained models and encoders
-├── app.py                # Main Streamlit application
-├── model_trainer.py      # Script to train and save models
-├── requirements.txt      # List of dependencies
-├── README.md             # Project documentation
-├── LICENSE               # MIT License
-└── .gitignore            # Files excluded from GitHub
+├── models/               
+│   ├── rf_model.pkl      # Optimized Random Forest Classifier
+│   ├── encoders.pkl      # Categorical Label Encoders
+│   └── features.pkl      # List of features for prediction
+├── app.py                # Streamlit Web Application
+├── model_trainer.py      # Data Preprocessing & Training Script
+├── requirements.txt      # Stable library dependencies
+├── .gitignore            # Excludes massive datasets while allowing models
+└── README.md             # Project Documentation
 ```
 
-## 📄 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 🛠️ Local Installation
+```bash
+git clone https://github.com/Abhishek-Maheshwari-778/creadet_card_risk_pridiction.git
+cd creadet_card_risk_pridiction
+python -m venv .venv
+# Activate venv and run:
+pip install -r requirements.txt
+streamlit run app.py
+```
 
 ---
 **Developed by [Abhishek Maheshwari](https://github.com/Abhishek-Maheshwari-778)**

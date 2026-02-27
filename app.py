@@ -5,31 +5,60 @@ import pickle
 import os
 
 # Page configuration
-st.set_page_config(page_title="Credit Risk Predictor", layout="wide", page_icon="💳")
+st.set_page_config(page_title="Credit Risk Predictor", layout="wide")
 
-# Custom CSS for premium look
+# Custom CSS for Professional Look and Fixed Visibility
 st.markdown("""
     <style>
-    .main {
-        background-color: #f8f9fa;
+    /* Force main title and headers to be visible */
+    h1, h2, h3, p, span, label {
+        color: #1E293B !important; /* Dark Slate color */
     }
+    
+    /* Main Background */
+    .stApp {
+        background-color: #F8FAFC;
+    }
+    
+    /* Sidebar Styling */
+    section[data-testid="stSidebar"] {
+        background-color: #0F172A !important;
+    }
+    section[data-testid="stSidebar"] .stMarkdown p, 
+    section[data-testid="stSidebar"] label {
+        color: #F8FAFC !important;
+    }
+    
+    /* Button Styling */
     .stButton>button {
         width: 100%;
-        border-radius: 5px;
+        border-radius: 8px;
         height: 3em;
-        background-color: #007bff;
-        color: white;
+        background-color: #2563EB !important;
+        color: white !important;
+        font-weight: bold;
+        border: none;
+        transition: 0.3s;
+    }
+    .stButton>button:hover {
+        background-color: #1D4ED8 !important;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    
+    /* Input field styling for visibility */
+    .stNumberInput input, .stSelectbox div {
+        color: #1E293B !important;
     }
     </style>
     """, unsafe_allow_html=True)
 
-st.title("💳 Credit Card Risk Prediction")
+st.title("Credit Card Risk Prediction")
+st.markdown("Assess applicant creditworthiness based on financial history and loan details.")
 st.markdown("---")
 
 # Load model and preprocessing objects
 @st.cache_resource
 def load_resources():
-    # Use absolute paths for Render stability
     base_dir = os.path.dirname(os.path.abspath(__file__))
     model_path = os.path.join(base_dir, 'models', 'rf_model.pkl')
     encoders_path = os.path.join(base_dir, 'models', 'encoders.pkl')
@@ -44,27 +73,21 @@ def load_resources():
             with open(features_path, 'rb') as f:
                 features = pickle.load(f)
             return model, encoders, features
-        except Exception as e:
-            st.error(f"Error loading model files: {e}")
+        except Exception:
+            pass
     return None, None, None
 
 model, encoders, features = load_resources()
 
 # Sidebar Status
-st.sidebar.title("App Status")
+st.sidebar.title("System Status")
 if model:
-    st.sidebar.success("✅ Prediction Engine Live")
+    st.sidebar.info("Prediction Engine: ACTIVE")
 else:
-    st.sidebar.error("❌ Model Files Missing")
-    st.sidebar.info("Please ensure 'models' folder is pushed to GitHub.")
-
-# Main UI Logic
-if model is None:
-    st.warning("⚠️ The prediction engine is currently in **Demo Mode** because the trained model files weren't found.")
-    features = ['loan_amnt', 'term', 'int_rate', 'installment', 'grade', 'emp_length', 'home_ownership', 'annual_inc', 'purpose']
+    st.sidebar.warning("Prediction Engine: OFFLINE (Demo Mode)")
 
 # Sidebar for inputs
-st.sidebar.header("Enter Applicant Details")
+st.sidebar.header("Applicant Details")
 
 def user_input_features():
     col1, col2 = st.columns(2)
@@ -94,10 +117,10 @@ def user_input_features():
 
 input_df = user_input_features()
 
-st.subheader("📋 Applicant Summary")
-st.write(input_df)
+st.subheader("Data Summary")
+st.dataframe(input_df, use_container_width=True)
 
-if st.button("Predict Credit Risk"):
+if st.button("RUN PREDICTION"):
     if model:
         proc_df = input_df.copy()
         for col, le in encoders.items():
@@ -107,22 +130,22 @@ if st.button("Predict Credit Risk"):
                 except:
                     proc_df[col] = le.transform([le.classes_[0]])[0]
         
-        proc_df = proc_df[features]
+        proc_df = proc_df[features if features else proc_df.columns]
         prediction = model.predict(proc_df)
         prediction_proba = model.predict_proba(proc_df)
         
         st.markdown("---")
-        st.subheader("🎯 Prediction Result")
+        st.subheader("Results")
         if prediction[0] == 0:
-            st.success("✅ **SAFE**: This applicant is likely to repay the loan.")
+            st.success("SAFE: High probability of repayment.")
         else:
-            st.error("🚨 **RISKY**: High probability of default detected.")
+            st.error("RISKY: Potential for default detected.")
             
-        st.info(f"**Model Confidence:** {max(prediction_proba[0])*100:.2f}%")
+        st.info(f"Analysis Confidence: {max(prediction_proba[0])*100:.2f}%")
     else:
-        st.error("Prediction engine is offline. Demo result based on interest rate logic:")
+        st.warning("Prediction engine offline. Demo logic active:")
         res = "RISKY" if input_df['int_rate'].values[0] > 18 else "SAFE"
-        st.write(f"RESULT: {res}")
+        st.write(f"PROJECTION: {res}")
 
 st.sidebar.markdown("---")
-st.sidebar.info("AI Mini Project Module-1")
+st.sidebar.caption("AI Mini Project Module-1")

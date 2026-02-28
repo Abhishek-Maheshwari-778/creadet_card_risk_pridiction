@@ -17,108 +17,29 @@ st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
     /* Global Styles */
-    * {
-        font-family: 'Outfit', sans-serif;
-    }
-    
-    .stApp {
-        background: radial-gradient(circle at top right, #1e293b, #0f172a);
-        color: #f1f5f9;
-    }
-
+    * { font-family: 'Outfit', sans-serif; }
+    .stApp { background: radial-gradient(circle at top right, #1e293b, #0f172a); color: #f1f5f9; }
     /* Glassmorphism Sidebar */
-    section[data-testid="stSidebar"] {
-        background-color: rgba(15, 23, 42, 0.8) !important;
-        backdrop-filter: blur(10px);
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
+    section[data-testid="stSidebar"] { background-color: rgba(15, 23, 42, 0.8) !important; backdrop-filter: blur(10px); border-right: 1px solid rgba(255, 255, 255, 0.1); }
     /* Headers */
-    h1 {
-        font-weight: 700 !important;
-        letter-spacing: -0.02em !important;
-        background: linear-gradient(90deg, #38bdf8, #818cf8);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 0.5rem !important;
-    }
-    
-    h2, h3, p, label {
-        color: #e2e8f0 !important;
-    }
-
+    h1 { font-weight: 700 !important; letter-spacing: -0.02em !important; background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem !important; }
+    h2, h3, p, label { color: #e2e8f0 !important; }
     /* Cards/Containers */
-    .stMarkdown div[data-testid="stMarkdownContainer"] p {
-        font-weight: 400;
-        opacity: 0.9;
-    }
-
+    .stMarkdown div[data-testid="stMarkdownContainer"] p { font-weight: 400; opacity: 0.9; }
     /* Input Fields Styling */
-    .stNumberInput, .stSelectbox, .stTextInput, .stSlider {
-        background-color: rgba(30, 41, 59, 0.5);
-        border-radius: 12px;
-        padding: 5px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    
-    .stNumberInput input, .stSelectbox div {
-        color: white !important;
-        background-color: transparent !important;
-    }
-    
+    .stNumberInput, .stSelectbox, .stTextInput, .stSlider { background-color: rgba(30, 41, 59, 0.5); border-radius: 12px; padding: 5px; border: 1px solid rgba(255, 255, 255, 0.05); }
+    .stNumberInput input, .stSelectbox div { color: white !important; background-color: transparent !important; }
     /* Buttons */
-    .stButton>button {
-        width: 100%;
-        background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%) !important;
-        color: white !important;
-        border: none !important;
-        padding: 0.75rem 1.5rem !important;
-        border-radius: 12px !important;
-        font-weight: 600 !important;
-        font-size: 1.1rem !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06) !important;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    .stButton>button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2) !important;
-        background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%) !important;
-    }
-
+    .stButton>button { width: 100%; background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%) !important; color: white !important; border: none !important; padding: 0.75rem 1.5rem !important; border-radius: 12px !important; font-weight: 600 !important; font-size: 1.1rem !important; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06) !important; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stButton>button:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2) !important; background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%) !important; }
     /* Result Containers */
-    .stAlert {
-        border-radius: 16px !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        backdrop-filter: blur(10px);
-    }
-    
+    .stAlert { border-radius: 16px !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; backdrop-filter: blur(10px); }
     /* Custom Dataframe */
-    [data-testid="stDataFrame"] {
-        background-color: rgba(15, 23, 42, 0.4);
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
+    [data-testid="stDataFrame"] { background-color: rgba(15, 23, 42, 0.4); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); }
     /* Hide Streamlit elements */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    
+    #MainMenu {visibility: hidden;} footer {visibility: hidden;} header {visibility: hidden;}
     /* Decoration */
-    .badge {
-        display: inline-block;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        background: rgba(37, 99, 235, 0.2);
-        color: #38bdf8;
-        border: 1px solid rgba(37, 99, 235, 0.3);
-        margin-bottom: 10px;
-    }
+    .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(37, 99, 235, 0.2); color: #38bdf8; border: 1px solid rgba(37, 99, 235, 0.3); margin-bottom: 10px; }
     </style>
     """, unsafe_allow_html=True)
 
